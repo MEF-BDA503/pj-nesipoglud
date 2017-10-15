@@ -1,0 +1,38 @@
+---
+title: "Interesting R Examples"
+author: "Name Surname - BDA 503 - Fall 2017"
+---
+```{r,echo=FALSE,results="hide"}
+library(knitr)
+opts_chunk$set(tidy.opts=list(width.cutoff=60),tidy=TRUE)
+```
+
+```{r,echo=FALSE,eval=FALSE}
+rmarkdown::render("/Users/berkorbay/Dropbox/Courses_given/MEF_BDA_503_2017F/Guidelines/example_homework_1.Rmd",output_format="pdf_document")
+rmarkdown::render("/Users/berkorbay/Dropbox/Courses_given/MEF_BDA_503_2017F/Guidelines/example_homework_1.Rmd",output_format="html_document")
+```
+
+1.[Machine Learning and Titanic] (https://www.kaggle.com/swamysm/random-forest-logistic-r-decison-t-svm-for-titanic)
+
+Random forest+Logistic.R+Decison.T+SVM for Titanic
+
+2. (https://stats.stackexchange.com/questions/118634/what-are-some-good-examples-of-exploratory-data-analysis-today)
+
+
+3. [Exploratory Data Analysis: Useful R Functions for Exploring a Data Frame](https://www.r-bloggers.com/exploratory-data-analysis-useful-r-functions-for-exploring-a-data-frame/)
+
+
+
+4. (http://astrostatistics.psu.edu/su07/R/reg.html)
+
+This tutorial shows some of the capabilities of R for exploring relationships among two or more quantative variables.
+
+
+5. [Watch your language - update: feature engineering](https://www.kaggle.com/headsortails/watch-your-language-update-feature-engineering)
+
+This is an extensive Exploratory Data Analysis for the Google Text Normalization Challenge - English Language competition with tidy R, ggplot2, and tidytext.
+
+The aim of this challenge is to “automate the process of developing text normalization grammars via machine learning” (see the challenge description). Text normalisation describes the process of transforming language into a specific, self-consistent grammar system with well-defined rules. 
+
+
+6. [Exploratory Analysis - Instacart](https://www.kaggle.com/philippsp/exploratory-analysis-instacart)
