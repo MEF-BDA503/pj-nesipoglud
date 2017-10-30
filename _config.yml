@@ -1,4 +1,4 @@
 theme: jekyll-theme-cayman
 title: Devrim Nesipoglu Progress Journal
 description: BDA 503 Fall 2017 - MEF University
-exclude: [files/example_homework_1.Rmd][files/Homework2.Rmd]
+exclude: [files/example_homework_1.Rmd,files/Homework2.Rmd]
