@@ -1,0 +1,111 @@
+---
+title: "diamonds"
+author: "Devrim Nesipoðlu"
+date: "4 Ocak 2018"
+output: html_document
+---
+
+# Diamond Price Prediction
+```{r setup, include=FALSE}
+Sys.setlocale(locale="Turkish_Turkey.1254")
+knitr::opts_chunk$set(echo = FALSE)
+setwd("C:/Users/DEVRIM.YALCINKAYA/Documents/R")
+options(Encoding="UTF-8")
+```
+The library needed
+
+```{r}
+#install.packages("rpart")
+library(rpart)
+library(rpart.plot)
+library(tidyverse)
+library(ggplot2) # Data visualization
+library(readr) # CSV file I/O, e.g. the read_csv function
+library(ggvis)
+library(dplyr)
+library(caret)
+```
+
+About the Data
+
+You can reach data from datasets installed for rpart
+
+```{r}
+data(diamonds)
+str(diamonds)
+```
+
+
+
+```{r}
+df <- diamonds[,c(1,2,3,4,5,6,7)]
+str(df)
+```
+
+
+```{r}
+head(df)
+
+```
+
+```{r}
+theme_set(theme_bw())
+ggplot(diamonds,aes(x=carat,y=price))+geom_jitter(aes(color=color,shape=cut))+
+labs(title="comparison of carat with price based on diamond cut and color")
+```
+
+```{r}
+ggplot(diamonds, aes(x=carat, y=depth, color=clarity)) + geom_point(alpha=0.3) + geom_smooth() +theme_light()+
+labs(title="Comparing diamond depth with carat and clarity")
+```
+
+```{r}
+ggplot(diamonds,aes(x=cut,fill=color))+geom_bar()
+```
+
+```{r}
+ggplot(diamonds,aes(x=price))+geom_density(aes(fill=factor(cut)),alpha=0.7)+labs(title="Price grouped by cut",x="Price",fill="Cut")
+```
+
+```{r}
+ggplot(diamonds,aes(x=clarity,y=depth))+geom_violin(aes(fill=cut))+theme_classic()+labs(title="How Cut impacts depth and clarity")
+```
+
+Predicting diamonds Price with Regression model CART on entire dataset.
+
+```{r}
+m1 <- rpart(price ~ ., data=df, method ="anova")
+m1
+
+```
+
+
+```{r}
+
+rpart.plot(m1, type=3, digits=3, fallen.leaves = TRUE)
+```
+
+Build model on train set and predict on test
+
+```{r}
+#
+p1 <- predict(m1, df)
+
+```
+
+
+```{r}
+Mean_Absolute_Error <- function(actual, predicted) {mean(abs(actual - predicted))}
+
+Mean_Absolute_Error
+
+Mean_Absolute_Error(df$price, p1)
+```
+
+##References
+
+R - Regression Trees - CART video of Jalayer Academy 
+https://www.youtube.com/watch?v=MoBw5PiW56k&t=321s
+
+For Data Visualization
+https://www.kaggle.com/devisangeetha/data-visualization
