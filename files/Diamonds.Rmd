@@ -11,6 +11,7 @@ output: html_document
 
 ```{r setup, include=FALSE}
 Sys.setlocale(locale="Turkish_Turkey.1254")
+
 knitr::opts_chunk$set(echo = TRUE)
 setwd("C:/Users/Dell_User/Documents/R")
 
