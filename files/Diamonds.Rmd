@@ -1,6 +1,6 @@
 ---
 title: "diamonds"
-author: "Devrim Nesipoðlu"
+author: "Devrim Nesipoglu"
 date: "4 Ocak 2018"
 output: html_document
 ---
@@ -10,7 +10,7 @@ output: html_document
 
 
 ```{r setup, include=FALSE}
-
+options(encoding = 'UTF-8')
 knitr::opts_chunk$set(echo = TRUE)
 
 
