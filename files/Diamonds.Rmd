@@ -1,0 +1,188 @@
+---
+title: "diamonds"
+author: "Devrim Nesipoglu"
+date: "4 Ocak 2018"
+output: html_document
+
+---
+
+## Assignment 3: Diamonds Price Estimation
+#          MEF - BDA 503
+
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(echo = TRUE)
+Sys.setlocale(locale="Turkish_Turkey.1254")
+knitr::opts_chunk$set(echo = FALSE)
+
+setwd("C:/Users/Dell_User/Documents/GitHub/pj-nesipoglud/files")
+
+```
+#Diamonds dataset
+
+This dataset contains the prices and other attributes for around 50.000 diamons. The features included are the following:
+
+  * carat: Weight of the diamond
+
+  * cut: Quality of the cut (Fair/Good/Very Good/ Premium/Ideal)
+
+  * color: Diamond color, ranging from J (worst) to D (best)
+
+  * clarity: A measurement of how clear the diamond is (I1 (worst), SI1, SI2, VS1, VS2, VVS1, VVS2, IF (best))
+
+  * depth: Total depth percentage = z / mean(x, y) = 2 * z / (x + y) (43–79)
+
+  * table: Width of top of diamond relative to widest point (43–95)
+
+  * price: Price in US dollars ($326–$18,823)
+
+  * x: Length in mm (0  10.74)
+  * y: Width in mm (0  58.9)
+  * z: Depth in mm (0  31.8)
+
+
+
+
+```{r echo=TRUE}
+
+library(rpart)
+library(rpart.plot)
+library(tidyverse)
+library(ggplot2) # Data visualization
+library(readr) # CSV file I/O, e.g. the read_csv function
+library(ggvis)
+library(dplyr)
+library(caret)
+```
+
+<br><br>
+
+#Exploratory Data Analysis
+
+
+General information about Diamonds dataset:
+
+
+```{r echo=TRUE}
+data(diamonds)
+str(diamonds)
+```
+
+```{r echo=TRUE}
+dim(diamonds)
+##result=>53940 observation  , 10 variable
+
+summary(diamonds)
+##result=>cut ,colar,clarity =>factors
+
+```
+
+
+
+```{r echo=TRUE}
+df <- diamonds[,c(1,2,3,4,5,6,7)]
+str(df)
+```
+
+
+```{r echo=TRUE}
+head(df)
+
+```
+
+
+# Data Visualization
+
+#ggplot2
+
+ggplot2 is a plotting system for R, based on Leland Wilkinson's "The grammar of graphics". 
+
+#qplot
+The qplot function is a convenient wrapper for creating a number of different types of plots using a consistent scheme. It is recommended for simple scatterplots. This function creates a ggplot object which will receive the actual plot.
+
+#geom
+An important parameter is geom. It specifies the geometric objects that define the graph type. Geom values include:
+
+  * point
+  * smooth
+  * boxplot
+  * line
+  * histogram
+  * density
+  * bar
+  * jitter
+
+using the pipe operator:
+
+  diamonds %>% qplot(carat, price, data = .)
+
+  To color these points, we just need to tell the function that the colors to be used depend on the cut feature, for example, by using the color argument.
+
+
+# Create a scatterplot for comparing price based on diamond cut and color
+
+```{r echo=TRUE}
+theme_set(theme_bw())
+ggplot(diamonds,aes(x=carat,y=price))+geom_jitter(aes(color=color,shape=cut))+
+labs(title="comparison of carat with price based on diamond cut and color")
+```
+
+```{r echo=TRUE}
+ggplot(diamonds, aes(x=carat, y=depth, color=clarity)) + geom_point(alpha=0.3) + geom_smooth() +theme_light()+
+labs(title="Comparing diamond depth with carat and clarity")
+```
+
+```{r echo=TRUE}
+ggplot(diamonds,aes(x=cut,fill=color))+geom_bar()
+```
+
+```{r echo=TRUE}
+ggplot(diamonds,aes(x=price))+geom_density(aes(fill=factor(cut)),alpha=0.7)+labs(title="Price grouped by cut",x="Price",fill="Cut")
+```
+
+```{r echo=TRUE}
+ggplot(diamonds,aes(x=clarity,y=depth))+geom_violin(aes(fill=cut))+theme_classic()+labs(title="How Cut impacts depth and clarity")
+```
+
+# Predicting diamonds Price with Regression model CART on entire dataset.
+
+Regression Trees are part of the CART family of techniques for prediction of a numerical target feature. rpart package with its CART algorithms is used. 
+
+
+```{r echo=TRUE}
+m1 <- rpart(price ~ ., data=df, method ="anova")
+m1
+
+```
+
+
+```{r echo=TRUE}
+
+rpart.plot(m1, type=3, digits=3, fallen.leaves = TRUE)
+```
+
+# Build model on train set and predict on test
+
+```{r echo=TRUE}
+#
+p1 <- predict(m1, df)
+
+```
+
+
+```{r echo=TRUE}
+Mean_Absolute_Error <- function(actual, predicted) {mean(abs(actual - predicted))}
+
+Mean_Absolute_Error
+
+Mean_Absolute_Error(df$price, p1)
+```
+
+#References
+
+R - Regression Trees - CART video of Jalayer Academy 
+https://www.youtube.com/watch?v=MoBw5PiW56k&t=321s
+
+For Data Visualization
+https://www.kaggle.com/devisangeetha/data-visualization
