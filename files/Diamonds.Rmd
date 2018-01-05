@@ -13,7 +13,10 @@ output: html_document
 ```{r setup, include=FALSE}
 
 knitr::opts_chunk$set(echo = TRUE)
+Sys.setlocale(locale="Turkish_Turkey.1254")
+knitr::opts_chunk$set(echo = FALSE)
 
+setwd("C:/Users/Dell_User/Documents/GitHub/pj-nesipoglud/files")
 
 ```
 #Diamonds dataset
@@ -34,9 +37,9 @@ This dataset contains the prices and other attributes for around 50.000 diamons.
 
   * price: Price in US dollars ($326–$18,823)
 
-  * x: Length in mm (0–10.74)
-  * y: Width in mm (0–58.9)
-  * z: Depth in mm (0–31.8)
+  * x: Length in mm (0  10.74)
+  * y: Width in mm (0  58.9)
+  * z: Depth in mm (0  31.8)
 
 
 
