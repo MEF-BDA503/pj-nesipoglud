@@ -1,9 +1,12 @@
 ---
 title: "Interesting R Examples"
-author: "Name Surname - BDA 503 - Fall 2017"
+author: "Devrim Nesipoglu - BDA 503 - Fall 2017"
 ---
 ```{r,echo=FALSE,results="hide"}
 library(knitr)
+Sys.setlocale(locale="Turkish_Turkey.1254")
+knitr::opts_chunk$set(echo = FALSE)
+setwd("C:/Users/Dell_User/Documents/GitHub/pj-nesipoglud/files")
 opts_chunk$set(tidy.opts=list(width.cutoff=60),tidy=TRUE)
 ```
 
@@ -32,7 +35,7 @@ This tutorial shows some of the capabilities of R for exploring relationships am
 
 This is an extensive Exploratory Data Analysis for the Google Text Normalization Challenge - English Language competition with tidy R, ggplot2, and tidytext.
 
-The aim of this challenge is to ìautomate the process of developing text normalization grammars via machine learningî (see the challenge description). Text normalisation describes the process of transforming language into a specific, self-consistent grammar system with well-defined rules. 
+The aim of this challenge is to ‚Äúautomate the process of developing text normalization grammars via machine learning‚Äù (see the challenge description). Text normalisation describes the process of transforming language into a specific, self-consistent grammar system with well-defined rules. 
 
 
 6. [Exploratory Analysis - Instacart](https://www.kaggle.com/philippsp/exploratory-analysis-instacart)
