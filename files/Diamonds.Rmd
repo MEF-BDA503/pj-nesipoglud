@@ -1,14 +1,11 @@
 ---
-title: "diamonds"
-author: "Devrim Nesipoglu"
-date: "4 Ocak 2018"
-output: html_document
-
----
 
 ## Assignment 3: Diamonds Price Estimation
 #          MEF - BDA 503
 
+Devrim Nesipoglu
+
+4 Ocak 2018
 
 ```{r setup, include=FALSE}
 
@@ -24,25 +21,15 @@ setwd("C:/Users/Dell_User/Documents/GitHub/pj-nesipoglud/files")
 This dataset contains the prices and other attributes for around 50.000 diamons. The features included are the following:
 
   * carat: Weight of the diamond
-
   * cut: Quality of the cut (Fair/Good/Very Good/ Premium/Ideal)
-
   * color: Diamond color, ranging from J (worst) to D (best)
-
   * clarity: A measurement of how clear the diamond is (I1 (worst), SI1, SI2, VS1, VS2, VVS1, VVS2, IF (best))
-
   * depth: Total depth percentage = z / mean(x, y) = 2 * z / (x + y) (43–79)
-
   * table: Width of top of diamond relative to widest point (43–95)
-
   * price: Price in US dollars ($326–$18,823)
-
-  * x: Length in mm (0  10.74)
-  * y: Width in mm (0  58.9)
-  * z: Depth in mm (0  31.8)
-
-
-
+  * x: Length in mm (0 - 10.74)
+  * y: Width in mm  (0 - 58.9)
+  * z: Depth in mm  (0 - 31.8)
 
 ```{r echo=TRUE}
 
