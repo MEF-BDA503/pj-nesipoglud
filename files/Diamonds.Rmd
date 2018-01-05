@@ -3,6 +3,7 @@ title: "diamonds"
 author: "Devrim Nesipoglu"
 date: "4 Ocak 2018"
 output: html_document
+
 ---
 
 ## Assignment 3: Diamonds Price Estimation
@@ -10,7 +11,7 @@ output: html_document
 
 
 ```{r setup, include=FALSE}
-options(encoding = 'UTF-8')
+
 knitr::opts_chunk$set(echo = TRUE)
 
 
@@ -27,15 +28,15 @@ This dataset contains the prices and other attributes for around 50.000 diamons.
 
   * clarity: A measurement of how clear the diamond is (I1 (worst), SI1, SI2, VS1, VS2, VVS1, VVS2, IF (best))
 
-  * depth: Total depth percentage = z / mean(x, y) = 2 * z / (x + y) (43–79)
+  * depth: Total depth percentage = z / mean(x, y) = 2 * z / (x + y) (43â€“79)
 
-  * table: Width of top of diamond relative to widest point (43–95)
+  * table: Width of top of diamond relative to widest point (43â€“95)
 
-  * price: Price in US dollars ($326–$18,823)
+  * price: Price in US dollars ($326â€“$18,823)
 
-  * x: Length in mm (0–10.74)
-  * y: Width in mm (0–58.9)
-  * z: Depth in mm (0–31.8)
+  * x: Length in mm (0â€“10.74)
+  * y: Width in mm (0â€“58.9)
+  * z: Depth in mm (0â€“31.8)
 
 
 
