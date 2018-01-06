@@ -13,8 +13,8 @@
 
 ## Udacity Course Report
 
-I completed "What is EDA?", "R Basics" and "Explore One Variable" lessons at Data Analysis with R section.
-and completed tasks at problem set:Explore One Variable
+I completed "What is EDA?", "R Basics" and "Explore One Variable" lessons at Data Analysis with R section
+and tasks at problem set:Explore One Variable
 
 
 
