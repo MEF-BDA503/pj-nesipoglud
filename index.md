@@ -10,7 +10,7 @@
 
 ## UDACITY
 
-I completed Lessons "What is EDA", "R Basics", "Explore One Variable" and solve Problem Set: Explore One Variable
+I completed Lessons "What is EDA", "R Basics", "Explore One Variable", "Explore Two Variables" and solve "Problem Set: Explore One Variable" and "Problem Set: Explore One Variable"
 
 
 ## Diamonds Price Estimation
@@ -19,3 +19,4 @@ I completed Lessons "What is EDA", "R Basics", "Explore One Variable" and solve 
 
 ## Final R Data
 + [Here](Final_R.RData) is data for Higher Education System analysis
++ [Here](Final_R.rmd) is final analysis
