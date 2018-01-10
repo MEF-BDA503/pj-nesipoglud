@@ -257,5 +257,6 @@ ggplot(full_titanic, aes(Age, fill = factor(Survived))) +
 References
 
 https://www.kaggle.com/vincentlugat/titanic-data-analysis-rf-prediction-0-81818/notebook
+
 https://www.kaggle.com/swamysm/beginners-titanic
 
