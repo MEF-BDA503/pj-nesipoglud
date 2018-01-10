@@ -61,8 +61,8 @@ library('plyr')
 ```{r}
 ##Lets Load raw data in the orginal form by setting stringsAsFactors = F
 
-train.tit <- read.csv('C:/Users/DEVRIM.YALCINKAYA/Documents/GitHub/pj-nesipoglud/files/Titanic_Data/train.csv', stringsAsFactors = F)
-test.tit  <- read.csv('C:/Users/DEVRIM.YALCINKAYA/Documents/GitHub/pj-nesipoglud/files/Titanic_Data/test.csv', stringsAsFactors = F)
+train.tit <- read.csv('C:/Titanic_Data/train.csv', stringsAsFactors = F)
+test.tit  <- read.csv('C:/Titanic_Data/test.csv', stringsAsFactors = F)
 test.tit$Survived <- NA
 
 ##Combine both test and train
