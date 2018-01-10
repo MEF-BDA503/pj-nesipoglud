@@ -1,5 +1,5 @@
 
-## Week 7 (Dec 19, 2017) (Jan 6-9, 2018)
+## Week 7 (Jan 6-9, 2018)
 
 + [Here](files/Final_R.RData) is data used for analysis for Higher Education System
 + [Here](files/Final.pdf) is answers for final exam
