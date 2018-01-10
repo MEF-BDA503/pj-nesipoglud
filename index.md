@@ -23,5 +23,5 @@ I completed Lessons "What is EDA", "R Basics", "Explore One Variable", "Explore 
 
 
 ## Final R Data
-+ [Here](Final_R.RData) is data for Higher Education System analysis
-+ [Here](Final_R.rmd) is final analysis
++ [Here](files/Final_R.RData) is data for Higher Education System analysis
++ [Here](files/Final.html) is final analysis
