@@ -8,6 +8,10 @@
 
 + [Here](files/Homework2.html) is my interesting dataset that I want to analyze. 
 
+## UDACITY
+
+I completed Lessons "What is EDA", "R Basics", "Explore One Variable" and solve Problem Set: Explore One Variable
+
 
 ## Diamonds Price Estimation
 + [Here](files/Diamonds.html) is Diamonds Price Estimation consists of explanatory analysis and prediction of diamonds
