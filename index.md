@@ -1,5 +1,3 @@
-#  Progress Journal
-
 
 ## Week 7 (Dec 19, 2017) (Jan 6-9, 2018)
 
