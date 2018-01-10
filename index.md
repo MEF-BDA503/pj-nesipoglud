@@ -4,9 +4,9 @@
 
 + [Here](files/Interesting_R_Examples) are interesting R examples includes EDA.
 
-## HATCO Dataset 
+## Titanic - Data set and Data Analysis
 
-+ [Here](files/Homework2.html) is my interesting dataset that I want to analyze. 
++ [Here](files/Titanic.html) is analysis for Titanic disaster 
 
 ## UDACITY
 

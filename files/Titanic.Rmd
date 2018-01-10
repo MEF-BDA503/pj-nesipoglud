@@ -1,0 +1,261 @@
+---
+title: "TITANIC DISASTER "
+author: "Devrim Nesipoğlu"
+output: html_document
+---
+
+I will try to explore the Titanic disaster training set available from Kaggle.com. The data set consists of 1309 paasengers who rode aboard the Titanic.
+
+1. Explore the variables
+
+The first step in EDA is reading in data and then exploring the variables. 
+
+Overview
+
+The data has been split into two groups:
+
+* training set (train.csv) for machine learning models.It will provide the outcome (also known as the “ground truth”) for each passenger and model will be based on “features” like passengers’ gender and class.
+
+* test set (test.csv) will be used how well model performs on unseen data.It does not provide the
+the ground truth for each passenger.
+
+Gender_submission.csv, a set of predictions that assume all and only female passengers survive, as an example of what a submission file should look like.
+
+DATA DICTIONARY
+
+VariableDefinitionKey survival Survival 0 = No, 1 = Yes pclass Ticket class 1 = 1st, 2 = 2nd, 3 = 3rd sex Sex Age Age in years sibsp # of siblings / spouses aboard the Titanic parch # of parents / children aboard the Titanic ticket Ticket number fare Passenger fare cabin Cabin number embarked Port of Embarkation C = Cherbourg, Q = Queenstown, S = Southampton
+Variable Notes
+pclass: A proxy for socio-economic status (SES)
+1st = Upper
+2nd = Middle
+3rd = Lower
+
+age: Age is fractional if less than 1. If the age is estimated, is it in the form of xx.5
+
+sibsp: The dataset defines family relations in this way...
+Sibling = brother, sister, stepbrother, stepsister
+Spouse = husband, wife (mistresses and fiancés were ignored)
+
+parch: The dataset defines family relations in this way...
+Parent = mother, father
+Child = daughter, son, stepdaughter, stepson
+Some children travelled only with a nanny, therefore parch=0 for them.
+
+```{r}
+##Load all the library required 
+
+library('ggplot2')
+library('caret') 
+library('dplyr') 
+library('randomForest') 
+library('rpart')
+library('rpart.plot')
+library('car')
+library('e1071')
+library('ggthemes')
+library('corrplot')
+library('plyr')
+```
+
+
+```{r}
+##Lets Load raw data in the orginal form by setting stringsAsFactors = F
+
+train.tit <- read.csv('C:/Users/DEVRIM.YALCINKAYA/Documents/GitHub/pj-nesipoglud/files/Titanic_Data/train.csv', stringsAsFactors = F)
+test.tit  <- read.csv('C:/Users/DEVRIM.YALCINKAYA/Documents/GitHub/pj-nesipoglud/files/Titanic_Data/test.csv', stringsAsFactors = F)
+test.tit$Survived <- NA
+
+##Combine both test and train
+full_titanic <- rbind(train.tit, test.tit)
+```
+
+```{r}
+##Check the structure
+str(full_titanic)
+```
+
+Check the dimensions of the data
+
+```{r}
+dim(full_titanic)
+```
+
+The output shows us that data set of 1309 records and 12 columns. 
+
+Several of the column variables are encoded as numeric data types (ints and floats) but a few of them are encoded as "object". 
+
+Let's check the head of the data to get a better sense of what the variables look like:
+
+Check the first 5 rows
+
+```{r}
+print(head(full_titanic,5))
+```
+
+We can see that this dataset is consists of numeric columns and columns with text data.
+
+Let's look at a statistical summary of the variables with summary
+
+After getting a sense of the data's structure, it is a good idea to look at a statistical summary of the variables with df.describe():
+
+
+```{r}
+summary(full_titanic)
+```
+
+```{R}
+glimpse(full_titanic)
+
+```
+
+
+
+Missing value imputation
+
+We can see from summary that Age, Fare, and Embarked have missing values, and that there is a large range in Fare. Naturally, Survived is missing for all test data rows.
+
+```{r}
+###is there any Missing obesrvation
+colSums(is.na(full_titanic))
+```
+
+
+```{r}
+####Empty data
+colSums(full_titanic=='')
+```
+
+
+```{r}
+names <- full_titanic$Name
+title <-  gsub("^.*, (.*?)\\..*$", "\\1", names)
+
+full_titanic$title <- title
+
+table(title) 
+```
+
+```{r}
+###MISS, Mrs, Master and Mr are taking more numbers
+
+###Better to group Other titles into bigger basket by checking gender and survival rate to aviod any overfitting
+
+
+full_titanic$title[full_titanic$title == 'Mlle']        <- 'Miss' 
+full_titanic$title[full_titanic$title == 'Ms']          <- 'Miss'
+full_titanic$title[full_titanic$title == 'Mme']         <- 'Mrs' 
+full_titanic$title[full_titanic$title == 'Lady']          <- 'Miss'
+full_titanic$title[full_titanic$title == 'Dona']          <- 'Miss'
+
+## I am afraid creating a new varible with small data can causes a overfit
+## However, My thinking is that combining below feauter into original variable may loss some predictive power as they are all army folks, doctor and nobel peoples 
+
+full_titanic$title[full_titanic$title == 'Capt']        <- 'Officer' 
+full_titanic$title[full_titanic$title == 'Col']        <- 'Officer' 
+full_titanic$title[full_titanic$title == 'Major']   <- 'Officer'
+full_titanic$title[full_titanic$title == 'Dr']   <- 'Officer'
+full_titanic$title[full_titanic$title == 'Rev']   <- 'Officer'
+full_titanic$title[full_titanic$title == 'Don']   <- 'Officer'
+full_titanic$title[full_titanic$title == 'Sir']   <- 'Officer'
+full_titanic$title[full_titanic$title == 'the Countess']   <- 'Officer'
+full_titanic$title[full_titanic$title == 'Jonkheer']   <- 'Officer'
+
+
+# Lets check who among Mr, Master, Miss having a better survival rate
+ ggplot(full_titanic[1:891,],aes(x = title,fill=factor(Survived))) +
+  geom_bar() +
+  ggtitle("Title V/S Survival rate")+
+  xlab("Title") +
+  ylab("Total Count") +
+  labs(fill = "Survived") 
+```
+
+
+
+
+
+```{r}
+# Lets create a Family size using Sibsp and Parch
+
+full_titanic$FamilySize <-full_titanic$SibSp + full_titanic$Parch + 1
+
+full_titanic$FamilySized[full_titanic$FamilySize == 1]   <- 'Single'
+full_titanic$FamilySized[full_titanic$FamilySize < 5 & full_titanic$FamilySize >= 2]   <- 'Small'
+full_titanic$FamilySized[full_titanic$FamilySize >= 5]   <- 'Big'
+
+full_titanic$FamilySized=as.factor(full_titanic$FamilySized)
+
+
+###Lets Visualize the Survival rate by Family size 
+ggplot(full_titanic[1:891,],aes(x = FamilySized,fill=factor(Survived))) +
+  geom_bar() +
+  ggtitle("Family Size V/S Survival Rate") +
+  xlab("FamilySize") +
+  ylab("Total Count") +
+  labs(fill = "Survived")
+```
+
+Exploratory Analysis on Embarked
+
+```{r}
+###is there any association between Survial rate and where he get into the Ship.   
+ ggplot(full_titanic[1:891,],aes(x = Embarked,fill=factor(Survived))) +
+  geom_bar() +
+  ggtitle("Embarked vs Survival") +
+  xlab("Embarked") +
+  ylab("Total Count") +
+  labs(fill = "Survived") 
+```
+
+
+Age vs Survived
+
+
+```{r}
+ggplot(full_titanic, aes(Age, fill = factor(Survived))) + 
+  geom_histogram(bins=30) + 
+  theme_few() +
+  xlab("Age") +
+  scale_fill_discrete(name = "Survived") + 
+  ggtitle("Age vs Survived")
+```
+
+
+Sex vs Survived
+
+```{r}
+# Sex vs Survived
+ggplot(full_titanic, aes(Sex, fill = factor(Survived))) + 
+  geom_bar(stat = "count", position = 'dodge')+
+  theme_few() +
+  xlab("Sex") +
+  ylab("Count") +
+  scale_fill_discrete(name = "Survived") + 
+  ggtitle("Sex vs Survived")
+
+tapply(full_titanic$Survived,full_titanic$Sex,mean)
+```
+
+
+Age vs Sex vs Survived
+
+
+```{r}
+#Sex vs Survived vs Age 
+ggplot(full_titanic, aes(Age, fill = factor(Survived))) + 
+  geom_histogram(bins=30) + 
+  theme_few() +
+  xlab("Age") +
+  ylab("Count") +
+  facet_grid(.~Sex)+
+  scale_fill_discrete(name = "Survived") + 
+  theme_few()+
+  ggtitle("Age vs Sex vs Survived")
+```
+
+
+References
+
+https://www.kaggle.com/vincentlugat/titanic-data-analysis-rf-prediction-0-81818/notebook
+https://www.kaggle.com/swamysm/beginners-titanic
+
