@@ -19,9 +19,9 @@ At Udacity,I completed lessons "What is EDA", "R Basics", "Explore One Variable"
 At DataCamp, I completed "Unsupervised Learning in R" continue other lessons. At this point, I gain 4520XP.
 
 
-## Week 4
+## Week 3
 
-I choose Titanic - Data set and Data Analysis for an analyzing
+I choose Titanic - Data set and Data Analysis for Explanatory Data Analyzing
 
 + [Here](files/Titanic.html) is analysis for Titanic disaster 
 
