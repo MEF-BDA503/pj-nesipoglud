@@ -6,9 +6,8 @@
 
 
 ## Week 6 (Nov 21, 2017) 
-I choose Diamonds Data for Assignment
 
-Diamonds Price Estimation
+I choose Diamonds Price Estimation for Assignment
 
 + [Here](files/Diamonds.html) is explanatory analysis and prediction of diamonds
 
