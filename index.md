@@ -13,7 +13,7 @@
 
 ## UDACITY
 
-I completed Lessons "What is EDA", "R Basics", "Explore One Variable", "Explore Two Variables" and solve "Problem Set: Explore One Variable" and "Problem Set: Explore One Variable"
+I completed Lessons "What is EDA", "R Basics", "Explore One Variable", "Explore Two Variables" and solve "Problem Set: Explore One Variable" and "Problem Set: Explore Two Variable"
 
 
 
